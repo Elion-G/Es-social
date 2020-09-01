@@ -36,8 +36,17 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
+//hasOne= Tiene un perfil
     public function profile(){
         return $this->hasOne(Profile::class);
+    }
+//belongsToy= pertenece a
+//belongsToMany= pertenece a un grupo y tiene muchos grupos
+    public function groups(){
+        return $this->belongsToMany(Group::class); 
+    }
+//hasOneThrough= tiene una localización a través de Profile
+    public function location(){
+        return $this->hasOneThrough(Location::class, Profile::class); 
     }
 }
