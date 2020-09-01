@@ -1,7 +1,4 @@
 @extends('layouts.app')
-
-
-
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -69,7 +66,7 @@
     </head>
     <body>
         @section('content')
-        <div class="flex-center position-ref full-height">
+        {{-- <div class="flex-center position-ref full-height"> --}}
             <div class="content">
                 <div class="title m-b-md">
                     ES_Social
@@ -81,7 +78,7 @@
                     @endforeach --}}
                 </div>
             </div>
-        </div>
+
         @endsection
     </body>
 </html>
