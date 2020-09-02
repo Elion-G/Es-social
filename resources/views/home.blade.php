@@ -1,11 +1,13 @@
 @extends('layouts.app')
+
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Página Principal</title>
+        <title>Laravel</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -60,32 +62,33 @@
             }
 
             .m-b-md {
-                margin-bottom: 30px;
+                margin-bottom: 50px;
             }
         </style>
     </head>
     <body>
         @section('content')
         {{-- <div class="flex-center position-ref full-height"> --}}
-            <div class="content">
-                <div class="title m-b-md">
-                    ES_Social
-                </div>
-                <div class="container">
-                    <div class="text-left col-3 shadow-sm" style="background-color: white">
-                      <div class="row-md-1">Perfil</div>
-                      <div class="row-md-3">Grupos</div>
-                      <div class="row-md-3">Qué estás pensando?</div>
+                <div class="content">
+                    <div class="title m-b-md">
+                        ES_social
                     </div>
-                  </div>
-                  
-                <div class="links">
-                    {{-- @foreach ($users as $user)
-                    <a href="#">{{ $user->name }}</a>
-                    @endforeach --}}
+
+                    <div class="links">
+                        <a href="https://laravel.com/docs">Docs</a>
+                        <a href="https://laracasts.com">Laracasts</a>
+                        <a href="https://laravel-news.com">News</a>
+                        <a href="https://blog.laravel.com">Blog</a>
+                        <a href="https://nova.laravel.com">Nova</a>
+                        <a href="https://forge.laravel.com">Forge</a>
+                        <a href="https://vapor.laravel.com">Vapor</a>
+                        <a href="https://github.com/laravel/laravel">GitHub</a>
+                    </div>
                 </div>
-            </div>
-        @endsection
+            @endsection
+        </div>
     </body>
+
 </html>
+
 
