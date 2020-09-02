@@ -71,14 +71,20 @@
                 <div class="title m-b-md">
                     ES_Social
                 </div>
-
+                <div class="container">
+                    <div class="text-left col-3 shadow-sm" style="background-color: white">
+                      <div class="row-md-1">Perfil</div>
+                      <div class="row-md-3">Grupos</div>
+                      <div class="row-md-3">Qué estás pensando?</div>
+                    </div>
+                  </div>
+                  
                 <div class="links">
                     {{-- @foreach ($users as $user)
                     <a href="#">{{ $user->name }}</a>
                     @endforeach --}}
                 </div>
             </div>
-
         @endsection
     </body>
 </html>
