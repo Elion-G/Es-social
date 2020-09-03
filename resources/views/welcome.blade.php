@@ -1,4 +1,4 @@
-@if (Auth::check()){
+@if (Auth::check())
     {{--  --}}
 @else
     <meta http-equiv="refresh" content="0;URL=login">
