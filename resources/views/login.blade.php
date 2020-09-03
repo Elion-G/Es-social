@@ -1,3 +1,8 @@
+@if (Auth::check()){
+    <meta http-equiv="refresh" content="2;URL=welcome">
+@else
+    {{--  --}}
+@endif
 <!DOCTYPE html>
 <html lang="en">
 <head>
