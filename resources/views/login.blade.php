@@ -1,5 +1,5 @@
-@if (Auth::check()){
-    <meta http-equiv="refresh" content="2;URL=welcome">
+@if (Auth::check())
+    <meta http-equiv="refresh" content="0;URL=welcome">
 @else
     {{--  --}}
 @endif
@@ -24,6 +24,17 @@
 <!------ Include the above in your HEAD tag ---------->
 </head>
 <body>
+    <script>
+        window.onload = function(){
+            var contenedor = document.getElementById('contenedor_carga');
+            contenedor.style.visibility = 'hidden';
+            contenedor.style.opacity = '0';
+        }
+    </script>
+    <div id="contenedor_carga">
+    <div id="carga">
+    </div>
+    </div>
     <section class="login-block">
         <div class="container">
             <div class="row">
@@ -32,7 +43,7 @@
     <form method="POST" action="{{ route('login') }}">
         @csrf
         <div class="form-group">
-            <label for="email" class="text-uppercase">{{ __('E-Mail Address') }}</label>
+            <label for="email" class="text-uppercase">{{ __('Correo Electrónico') }}</label>
             <div class="col">
                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
@@ -45,7 +56,7 @@
             
         </div>
         <div class="form-group">
-            <label for="password" class="text-uppercase">{{ __('Password') }}</label>
+            <label for="password" class="text-uppercase">{{ __('Contraseña') }}</label>
             <div class="col">
                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
 
@@ -64,6 +75,11 @@
             <small>Recordar Sesión</small>
             </label>
             <!-- Indica una acción exitosa o positiva -->
+            @if (Route::has('register'))
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('register') }}">{{ __('Registrarse') }}</a>
+                </li>
+            @endif
             <button type="submit" class="btn btn-success float-right">Iniciar Sesión</button>
         </div>
         
