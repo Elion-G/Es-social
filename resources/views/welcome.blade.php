@@ -7,6 +7,6 @@
     <title>Es Social</title>
 </head>
 <body>
-    <h1>Sitio en Construccion</h1>
+    <h1>Sitio en Construccion </h1>
 </body>
 </html>
