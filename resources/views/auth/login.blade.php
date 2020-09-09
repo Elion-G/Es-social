@@ -1,8 +1,3 @@
-@if (Auth::check())
-    <meta http-equiv="refresh" content="0;URL=welcome">
-@else
-    {{--  --}}
-@endif
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/login_style.css') }}" rel="stylesheet">
 
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
@@ -97,14 +92,13 @@
 
                             </div>
                             <div class="carousel-item">
-                            <img class="d-block img-fluid" src="images/4.png" alt="First slide">
+                            <img class="d-block img-fluid" src="images/3.png" alt="First slide">
                             </div>
                             <div class="carousel-item">
-                            <img class="d-block img-fluid" src="images/5.png" alt="First slide">
+                            <img class="d-block img-fluid" src="images/3.png" alt="First slide">
                             </div>
                     </div>
                     </div>	   
-                    
                 </div>
             </div>
         </div>

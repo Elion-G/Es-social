@@ -85,9 +85,10 @@
                     contenedor.style.opacity = '0';
                 }
             </script>
-        @section('content')
-        {{-- <div class="flex-center position-ref full-height"> --}}
-                <div class="content">
+    @section('content')
+        <div class="container">
+            <div class="flex-center position-ref full-height">
+                {{-- <div class="content">
                     <div class="title m-b-md">
                         ES_social
                     </div>
@@ -102,9 +103,11 @@
                         <a href="https://vapor.laravel.com">Vapor</a>
                         <a href="https://github.com/laravel/laravel">GitHub</a>
                     </div>
-                </div>
-            @endsection
+                </div> --}}
+                <example-component></example-component>
+            </div>
         </div>
+    @endsection
     </body>
 
 </html>
