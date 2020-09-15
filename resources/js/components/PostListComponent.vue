@@ -5,17 +5,17 @@
                 <div class="d-flex align-items-center mb-2">
                     <img class="rounded mr-3" width="40px" src="/images/usuario-default.png" alt="">
                     <div>
-                        <h5>Elias Hacker</h5>
+                        <h5>{{ post.user_name}}</h5>
                     </div>
                 </div>
                 <p class="card-text mb-1" v-text="post.body"></p>
-                <div>
-                    <img class="img-fluid" src="/images/post-img1.jpeg" alt="">
+                <div v-for="image in post.images" :key="image.id" >
+                    <img class="img-fluid" :src="urlImage(image.path)" alt="">
                 </div>
                 <div  class="d-flex justify-content-between mt-2 mb-0">
                     <p class="mr-3 mb-0"><i class="fas fa-heart"></i>1,3K</p>
                     <p class="mb-0"><i class="far fa-comment"></i>777</p>
-                    <p class="mb-0">Hace 1 dia</p>
+                    <p class="mb-0">{{ post.created_at }}</p>
                 </div>
             </div>
         </div> 
@@ -38,8 +38,13 @@
                 console.log(error.response.data)
             })
             EventBus.$on('post-created', posts => {
-                this.posts.unshift(posts)
+                this.posts.unshift(posts.data[0])
             })
         },
+        methods: {
+            urlImage(path){
+                return "storage/"+path.substring(7) 
+            }
+        }
     }
 </script>
