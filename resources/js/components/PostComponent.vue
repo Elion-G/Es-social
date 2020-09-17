@@ -5,13 +5,14 @@
             <textarea v-model="body" 
                 class="form-control border-0" 
                 name="body" 
-                :placeholder="`Que estas haciendo ${currentUser.name}?`"> 
+                :placeholder="`Cuentanos en que piensas, ${currentUser.name}?`"> 
             </textarea>
 
             <input @change="SelectedFile" type="file">
             <div v-for="imagen in imagesFiles" :key="imagen.urlimg">
                 <img width="50px" :src="imagen.urlimg">
             </div>
+           
             
         </div>
         <div class="card-footer">
