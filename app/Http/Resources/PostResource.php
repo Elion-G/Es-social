@@ -20,7 +20,9 @@ class PostResource extends JsonResource
             'body' => $this->body,
             'user_name' => $this->user->name,
             'created_at' => $this->created_at->diffForHumans(),
-            'images' => $this->images
+            'images' => $this->images,
+            'liked' => $this->isLiked(),
+            'countLike' => $this->countLike()
         ];
     }
 }
