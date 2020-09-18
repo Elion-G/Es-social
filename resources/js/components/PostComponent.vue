@@ -1,23 +1,69 @@
+<style>
+    div {
+        position: relative;
+        overflow: hidden;
+    }
+    input {
+        position: absolute;
+        font-size: 50px;
+        opacity: 0;
+        right: 0;
+        top: 0;
+    }
+    
+
+</style>
 <template>
 <div>
     <form @submit.prevent="submit" v-if="isAuthenticated">
-        <div class="card-body">
-            <textarea v-model="body" 
-                class="form-control border-0" 
-                name="body" 
-                :placeholder="`Cuentanos en que piensas, ${currentUser.name}?`"> 
-            </textarea>
+        <div class="card-body p-2">
+            <div class="row d-flex flex-column mb-2">
+                <div class="col-12 d-flex align-items-center">
+                    <img class="rounded-circle mr-3" width="40px" src="/images/usuario-default.png" alt="">
+                    <textarea v-model="body" 
+                        class="form-control border-1" 
+                        name="body" 
+                        rows="2"
+                        :placeholder="`Qué estás pensando, ${currentUser.name}?`"> 
+                    </textarea>
+                </div>
+            </div>
+           
+            <div class="row d-flex justify-content-between align-items-center pl-3 pr-3">
 
-            <input @change="SelectedFile" type="file">
+                   
+                <div class="file btn btn-lgy m-0 p-0"> 
+                    <label for="file-post" class="align-items-center pb-0">
+                        <span style="font-size: 2em; color: #00acc1;">
+                            <i class="far fa-images"></i>
+                        </span> Foto
+                    </label>
+                    <input id="file-post"  @change="SelectedFile" type="file" name="file"/>
+                </div>
+
+                      
+                <div class="file btn btn-lgy m-0 p-0"> 
+                    <label for="file-post" class="align-items-center pb-0">
+                        <span style="font-size: 2em; color: #00acc1;">
+                            <i class="fas fa-film"></i>
+                        </span> Video
+                    </label>
+                    <input id="file-post"  @change="SelectedFile" type="file" name="file"/>
+                </div>
+                   
+                    
+                
+                <button class="btn btn-primary">Publicar</button>
+               
+
+               
+            </div>
+
             <div v-for="imagen in imagesFiles" :key="imagen.urlimg">
                 <img width="50px" :src="imagen.urlimg">
             </div>
-           
             
-        </div>
-        <div class="card-footer">
-            <button class="btn btn-primary">Publicar</button>
-        </div>     
+        </div>   
     </form>
     <div v-else class="card-body">
         <p>Inicie Sesion para publicar</p>
