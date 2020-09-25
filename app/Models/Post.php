@@ -24,6 +24,10 @@ class Post extends Model
         return $this->hasMany(Like::class);
     }
 
+    public function coments(){
+        return $this->hasMany(Coment::class);
+    }
+
     public function like()
     {
         $this->likes()->firstOrCreate([
@@ -45,5 +49,14 @@ class Post extends Model
 
     public function countLike(){
         return $this->likes()->count();
+    }
+
+    public function isComents()
+    {
+        return $this->coments()->get();
+    }
+
+    public function countComents(){
+        return $this->coments()->count();
     }
 }
