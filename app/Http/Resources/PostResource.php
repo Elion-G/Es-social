@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Carbon\Carbon;
+use App\Http\Resources\ComentResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class PostResource extends JsonResource
@@ -23,7 +24,7 @@ class PostResource extends JsonResource
             'images' => $this->images,
             'liked' => $this->isLiked(),
             'countLike' => $this->countLike(),
-            'coments' => $this->isComents(),
+            'coments' => ComentResource::collection($this->coments),
             'countComents' => $this->countComents(),
         ];
     }

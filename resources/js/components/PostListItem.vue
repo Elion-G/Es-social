@@ -16,7 +16,17 @@
                 <textarea name="coment" v-model="newComent"></textarea>
                 <button>Comentar</button>
             </form>
-            <p v-for="coment in post.coments" :key="coment.id">{{ coment.body }}</p>
+            <div v-for="coment in coments" :key="coment.id">
+                {{ coment.body }}
+                <div @click="isGuest">
+                    <p v-if="coment.liked" @click="cunliked(coment)">
+                        <i class="fas fa-heart mr-1"></i>{{ coment.countLike}}
+                    </p>
+                    <p v-else @click="clike(coment)">
+                        <i class="far fa-heart mr-1"></i>{{ coment.countLike }}
+                    </p>
+                </div>
+            </div>
         </div>
     </div> 
 </template>
@@ -33,7 +43,7 @@ export default {
     data(){
         return {
             newComent: '',
-            coments: [],
+            coments: this.post.coments,
         }
     },
     methods: {
@@ -43,11 +53,32 @@ export default {
         addComent(){
             axios.post(`/posts/${this.post.id}/coments`,{ body: this.newComent })
             .then(res => {
-                this.post.coments.unshift(res.data.data)
+                this.coments.unshift(res.data.data)
                 this.newComent = ""
-                this.post.countComents++
+                this.countComents++
             })
             .catch(error =>{
+                console.log(error.response.data)
+            })
+        },
+
+        clike(coment){
+            axios.post(`coments/${coment.id}/likes`)
+            .then(res => {
+                coment.liked = true
+                coment.countLike++
+            })
+            .catch(error => {
+                console.log(error.response.data)
+            })
+        },
+        cunliked(coment){
+            axios.delete(`coments/${coment.id}/likes`)
+            .then(res => {
+                coment.liked = false
+                coment.countLike--
+            })
+            .catch(error => {
                 console.log(error.response.data)
             })
         }

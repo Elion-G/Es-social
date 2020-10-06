@@ -97,20 +97,24 @@
                     fd.append('body', this.body)
                 }
                 
+                // if(fd.entries().next().done){
+                    axios.post('post', fd,{
+                        onUploadProgress: uploadEvent =>{
+                            console.log('Upload Progress: '+ Math.round(uploadEvent.loaded / uploadEvent.total * 100) + '%')
+                        }
+                    })
+                    .then(res => {
+                        EventBus.$emit('post-created',res.data)
+                        this.body = ""
+                        this.imagesFiles = []
+                    })
+                    .catch(error =>{
+                        console.log(error.response.data)
+                    })
+                // }else{
+                //     this.$toasted.error( 'datos vacíos', {duration:3000, keepOnHover:true})
+                // }
                 
-                axios.post('post', fd,{
-                    onUploadProgress: uploadEvent =>{
-						console.log('Upload Progress: '+ Math.round(uploadEvent.loaded / uploadEvent.total * 100) + '%')
-					}
-                })
-                .then(res => {
-                    EventBus.$emit('post-created',res.data)
-                    this.body = ""
-                    this.imagesFiles = []
-                })
-                .catch(error =>{
-                    console.log(error.response.data)
-                })
             },
 
             SelectedFile(event)

@@ -12,4 +12,7 @@ Route::delete('posts/{post}/likes','PostLikeController@destroy')->name('posts.po
 
 Route::post('posts/{post}/coments','PostComentsController@store')->name('posts.post.coments.store')->middleware('auth');
 
+Route::post('coments/{coment}/likes','ComentLikeController@store')->name('coments.coment.like.store');
+Route::delete('coments/{coment}/likes','ComentLikeController@destroy')->name('coments.coment.like.destroy');
+
 Auth::routes();

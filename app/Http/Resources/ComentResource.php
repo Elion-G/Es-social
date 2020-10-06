@@ -17,6 +17,8 @@ class ComentResource extends JsonResource
         return [
             'id' => $this->id,
             'body' => $this->body,
+            'liked' => $this->isLiked(),
+            'countLike' => $this->countLike(),
         ];
     }
 }
