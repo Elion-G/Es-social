@@ -4,7 +4,7 @@
             <div class="d-flex align-items-center mb-2">
                 <img class="rounded mr-3" width="40px" src="/images/usuario-default.png" alt="">
                 <div>
-                    <h5>{{ post.user_name}}</h5>
+                    <a :href="post.user.link"><h5>{{ post.user.name}}</h5></a>
                 </div>
             </div>
             <p class="card-text mb-1" v-text="post.body"></p>

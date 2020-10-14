@@ -41,5 +41,19 @@ class User extends Authenticatable
     public function posts(){
         return $this->hasMany(Post::class);
     }
+
+    public function getRouteKeyName()
+    {
+        return 'name';
+    }
    
+    public function link()
+    {
+        return route('users.show',$this);
+    }
+
+    public function avatar()
+    {
+        return 'http://imagen.jpg';
+    }
 }

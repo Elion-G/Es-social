@@ -13,7 +13,7 @@ class PostController extends Controller
     public function index()
     {
         return PostResource::collection(
-            Post::with('images')->latest()->paginate()
+            Post::with(['images','user'])->latest()->paginate()
         );
     }
     

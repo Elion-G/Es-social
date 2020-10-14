@@ -36,20 +36,20 @@
                     <label for="file-post" class="align-items-center pb-0">
                         <span style="font-size: 2em; color: #00acc1;">
                             <i class="far fa-images"></i>
-                        </span> Foto
+                        </span> Multimedia
                     </label>
                     <input id="file-post"  @change="SelectedFile" type="file" name="file"/>
                 </div>
 
                       
-                <div class="file btn btn-lgy m-0 p-0"> 
+               <!--  <div class="file btn btn-lgy m-0 p-0"> 
                     <label for="file-post" class="align-items-center pb-0">
                         <span style="font-size: 2em; color: #00acc1;">
                             <i class="fas fa-film"></i>
                         </span> Video
                     </label>
                     <input id="file-post"  @change="SelectedFile" type="file" name="file"/>
-                </div>
+                </div> -->
                    
                     
                 
@@ -59,8 +59,14 @@
                
             </div>
 
-            <div v-for="imagen in imagesFiles" :key="imagen.urlimg">
-                <img width="50px" :src="imagen.urlimg">
+            <div class="row pr-2 pl-2">
+                <div class="col-3 pl-1 pr-1" v-for="imagen in imagesFiles" :key="imagen.urlimg">
+                    <img  class="img-thumbnail" :src="imagen.urlimg">
+                    <button class="btn btn-danger btn-xs" style="position:absolute">
+                        <i class="fas fa-minus-square"></i>
+                    </button>
+                    
+                </div>
             </div>
             
         </div>   
@@ -87,7 +93,6 @@
             submit(){
                 const fd = new FormData();
                 if(Object.keys(this.imagesFiles).length != 0){
-                    console.log(this.body)
                     this.imagesFiles.forEach(element => {
                         fd.append('image[]', element.img)
                         fd.append('body', this.body)
@@ -97,7 +102,7 @@
                     fd.append('body', this.body)
                 }
                 
-                // if(fd.entries().next().done){
+                if(this.imagesFiles.length > 0 || this.body.trim()){
                     axios.post('post', fd,{
                         onUploadProgress: uploadEvent =>{
                             console.log('Upload Progress: '+ Math.round(uploadEvent.loaded / uploadEvent.total * 100) + '%')
@@ -111,9 +116,9 @@
                     .catch(error =>{
                         console.log(error.response.data)
                     })
-                // }else{
-                //     this.$toasted.error( 'datos vacíos', {duration:3000, keepOnHover:true})
-                // }
+                }else{
+                    this.$toasted.error( 'datos vacíos', {duration:3000, keepOnHover:true})
+                }
                 
             },
 

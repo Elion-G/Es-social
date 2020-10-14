@@ -15,4 +15,6 @@ Route::post('posts/{post}/coments','PostComentsController@store')->name('posts.p
 Route::post('coments/{coment}/likes','ComentLikeController@store')->name('coments.coment.like.store');
 Route::delete('coments/{coment}/likes','ComentLikeController@destroy')->name('coments.coment.like.destroy');
 
+Route::get('@{user}','UserController@show')->name('users.show');
+
 Auth::routes();

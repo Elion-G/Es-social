@@ -2027,6 +2027,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2043,7 +2049,6 @@ __webpack_require__.r(__webpack_exports__);
       var fd = new FormData();
 
       if (Object.keys(this.imagesFiles).length != 0) {
-        console.log(this.body);
         this.imagesFiles.forEach(function (element) {
           fd.append('image[]', element.img);
           fd.append('body', _this.body);
@@ -2051,22 +2056,26 @@ __webpack_require__.r(__webpack_exports__);
       } else {
         fd.append('image[]', this.imagesFiles);
         fd.append('body', this.body);
-      } // if(fd.entries().next().done){
+      }
 
-
-      axios.post('post', fd, {
-        onUploadProgress: function onUploadProgress(uploadEvent) {
-          console.log('Upload Progress: ' + Math.round(uploadEvent.loaded / uploadEvent.total * 100) + '%');
-        }
-      }).then(function (res) {
-        EventBus.$emit('post-created', res.data);
-        _this.body = "";
-        _this.imagesFiles = [];
-      })["catch"](function (error) {
-        console.log(error.response.data);
-      }); // }else{
-      //     this.$toasted.error( 'datos vacíos', {duration:3000, keepOnHover:true})
-      // }
+      if (this.imagesFiles.length > 0 || this.body.trim()) {
+        axios.post('post', fd, {
+          onUploadProgress: function onUploadProgress(uploadEvent) {
+            console.log('Upload Progress: ' + Math.round(uploadEvent.loaded / uploadEvent.total * 100) + '%');
+          }
+        }).then(function (res) {
+          EventBus.$emit('post-created', res.data);
+          _this.body = "";
+          _this.imagesFiles = [];
+        })["catch"](function (error) {
+          console.log(error.response.data);
+        });
+      } else {
+        this.$toasted.error('datos vacíos', {
+          duration: 3000,
+          keepOnHover: true
+        });
+      }
     },
     SelectedFile: function SelectedFile(event) {
       this.image = event.target.files[0];
@@ -38536,93 +38545,89 @@ var render = function() {
             }
           },
           [
-            _c(
-              "div",
-              { staticClass: "card-body p-2" },
-              [
-                _c("div", { staticClass: "row d-flex flex-column mb-2" }, [
-                  _c(
+            _c("div", { staticClass: "card-body p-2" }, [
+              _c("div", { staticClass: "row d-flex flex-column mb-2" }, [
+                _c("div", { staticClass: "col-12 d-flex align-items-center" }, [
+                  _c("img", {
+                    staticClass: "rounded-circle mr-3",
+                    attrs: {
+                      width: "40px",
+                      src: "/images/usuario-default.png",
+                      alt: ""
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("textarea", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.body,
+                        expression: "body"
+                      }
+                    ],
+                    staticClass: "form-control border-1",
+                    attrs: {
+                      name: "body",
+                      rows: "2",
+                      placeholder:
+                        "Qué estás pensando, " + _vm.currentUser.name + "?"
+                    },
+                    domProps: { value: _vm.body },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.body = $event.target.value
+                      }
+                    }
+                  })
+                ])
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "row d-flex justify-content-between align-items-center pl-3 pr-3"
+                },
+                [
+                  _c("div", { staticClass: "file btn btn-lgy m-0 p-0" }, [
+                    _vm._m(0),
+                    _vm._v(" "),
+                    _c("input", {
+                      attrs: { id: "file-post", type: "file", name: "file" },
+                      on: { change: _vm.SelectedFile }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("button", { staticClass: "btn btn-primary" }, [
+                    _vm._v("Publicar")
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "row pr-2 pl-2" },
+                _vm._l(_vm.imagesFiles, function(imagen) {
+                  return _c(
                     "div",
-                    { staticClass: "col-12 d-flex align-items-center" },
+                    { key: imagen.urlimg, staticClass: "col-3 pl-1 pr-1" },
                     [
                       _c("img", {
-                        staticClass: "rounded-circle mr-3",
-                        attrs: {
-                          width: "40px",
-                          src: "/images/usuario-default.png",
-                          alt: ""
-                        }
+                        staticClass: "img-thumbnail",
+                        attrs: { src: imagen.urlimg }
                       }),
                       _vm._v(" "),
-                      _c("textarea", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.body,
-                            expression: "body"
-                          }
-                        ],
-                        staticClass: "form-control border-1",
-                        attrs: {
-                          name: "body",
-                          rows: "2",
-                          placeholder:
-                            "Qué estás pensando, " + _vm.currentUser.name + "?"
-                        },
-                        domProps: { value: _vm.body },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.body = $event.target.value
-                          }
-                        }
-                      })
+                      _vm._m(1, true)
                     ]
                   )
-                ]),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticClass:
-                      "row d-flex justify-content-between align-items-center pl-3 pr-3"
-                  },
-                  [
-                    _c("div", { staticClass: "file btn btn-lgy m-0 p-0" }, [
-                      _vm._m(0),
-                      _vm._v(" "),
-                      _c("input", {
-                        attrs: { id: "file-post", type: "file", name: "file" },
-                        on: { change: _vm.SelectedFile }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "file btn btn-lgy m-0 p-0" }, [
-                      _vm._m(1),
-                      _vm._v(" "),
-                      _c("input", {
-                        attrs: { id: "file-post", type: "file", name: "file" },
-                        on: { change: _vm.SelectedFile }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _c("button", { staticClass: "btn btn-primary" }, [
-                      _vm._v("Publicar")
-                    ])
-                  ]
-                ),
-                _vm._v(" "),
-                _vm._l(_vm.imagesFiles, function(imagen) {
-                  return _c("div", { key: imagen.urlimg }, [
-                    _c("img", { attrs: { width: "50px", src: imagen.urlimg } })
-                  ])
-                })
-              ],
-              2
-            )
+                }),
+                0
+              )
+            ])
           ]
         )
       : _c("div", { staticClass: "card-body" }, [
@@ -38642,7 +38647,7 @@ var staticRenderFns = [
         _c("span", { staticStyle: { "font-size": "2em", color: "#00acc1" } }, [
           _c("i", { staticClass: "far fa-images" })
         ]),
-        _vm._v(" Foto\r\n                    ")
+        _vm._v(" Multimedia\r\n                    ")
       ]
     )
   },
@@ -38651,14 +38656,12 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c(
-      "label",
-      { staticClass: "align-items-center pb-0", attrs: { for: "file-post" } },
-      [
-        _c("span", { staticStyle: { "font-size": "2em", color: "#00acc1" } }, [
-          _c("i", { staticClass: "fas fa-film" })
-        ]),
-        _vm._v(" Video\r\n                    ")
-      ]
+      "button",
+      {
+        staticClass: "btn btn-danger btn-xs",
+        staticStyle: { position: "absolute" }
+      },
+      [_c("i", { staticClass: "fas fa-minus-square" })]
     )
   }
 ]
@@ -38728,7 +38731,11 @@ var render = function() {
             }
           }),
           _vm._v(" "),
-          _c("div", [_c("h5", [_vm._v(_vm._s(_vm.post.user_name))])])
+          _c("div", [
+            _c("a", { attrs: { href: _vm.post.user.link } }, [
+              _c("h5", [_vm._v(_vm._s(_vm.post.user.name))])
+            ])
+          ])
         ]),
         _vm._v(" "),
         _c("p", {
